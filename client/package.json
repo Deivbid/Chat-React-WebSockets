@@ -5,6 +5,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "global": "^4.3.2",
+    "immutable": "^3.8.2",
+    "lodash": "^4.17.10",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",

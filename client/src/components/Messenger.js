@@ -56,11 +56,15 @@ export default class Messenger extends Component{
 		this.addTestMessages()
 	}
 	render(){
-		const { height, messages } 		= this.state
+		
+		const {store} = this.props
+		const { height } 		= this.state
 		const style 			= {
 			height: height,
 
 		}
+		console.log(store)
+		const messages = store.getMessages
 		return(
 			<div style={style} className="app-messenger">
 				<div className="header">
