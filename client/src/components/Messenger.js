@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import classNames from 'classnames'
 import Avatar from '../images/profile-default.jpg'
 
 export default class Messenger extends Component{
@@ -22,7 +23,7 @@ export default class Messenger extends Component{
 		for(let i = 0; i < 100; i++)
 		{
 			let isMe 				= false
-			if(i % 2 == 0)
+			if(i % 2 === 0)
 			{
 				isMe 				= true
 			}			
@@ -81,7 +82,18 @@ export default class Messenger extends Component{
 				
 				<div className="main">
 					<div className="sidebar-left">
-						Left
+						<div className="channels">
+							<div className="channel">
+								<div className="user-image">
+									<img src={Avatar} alt="channel-profile" />
+								</div>
+
+								<div className="channel-info">
+									<h2> Toan, Alexander </h2>
+									<p>Hello There....</p>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<div className="content">
@@ -89,25 +101,57 @@ export default class Messenger extends Component{
 
 							{messages.map((message, index) => {
 								return (
-									<div key={index} className="message">
+									<div key={index} className={classNames('message', {'me': message.me})}>
 										<div className="message-user-image">
 											<img src={Avatar} alt="profile" />
 										</div>
 										
 										<div className="message-body">
-											<div className="message-author"> David says: </div>
+											<div className="message-author"> {message.author} says: </div>
 											<div className="message-text">
-												<p>Hello There...</p>
+												<p>{message.body}</p>
 											</div>
 										</div>
 									</div>
 								)
 							})}
 						</div>
+
+						<div className="messenger-input">
+							<div className="text-input">
+								<textarea placeholder="Write your message here..."/>
+							</div>
+							<div className="action">
+								<button className="send"> Send </button>	
+							</div>
+						</div>
 					</div>
 
 					<div className="sidebar-right">
-						Right
+						<h2 className="title">Members</h2>
+						<div className="members">
+							<div className="member">
+								<div className="user-image">
+									<img src={Avatar} alt="image-right" />
+								</div>
+
+								<div className="member-info">
+									<h2>Toan Nguyen Dinh</h2>
+									<p>Joined: 3 days ago.</p>
+								</div>
+							</div>
+
+							<div className="member">
+								<div className="user-image">
+									<img src={Avatar} alt="image-right" />
+								</div>
+
+								<div className="member-info">
+									<h2>Toan Nguyen Dinh</h2>
+									<p>Joined: 3 days ago.</p>
+								</div>
+							</div>							
+						</div>
 					</div>
 				</div>
 

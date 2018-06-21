@@ -21,7 +21,7 @@ body{
 .app-messenger{
 	display: flex;
 	flex-direction: column;
-	overflow: hidden;
+
 	.header{
 		height: $header-height;
 		display: flex;
@@ -79,7 +79,7 @@ body{
 	.main{
 		display: flex;
 		height: 100%;
-
+		overflow: hidden;
 		.sidebar-left{
 			width: $left-sidebar-width;
 			border-right: 1px solid $border-color;
@@ -87,12 +87,46 @@ body{
 
 		.sidebar-right{
 			width: $right-sidebar-width;
-			border-left: 1px solid $border-color
+			border-left: 1px solid $border-color;
+			.title{
+				padding: 10px;
+			}
 		}
 
 		.content{
 			flex-grow: 1;
-			overflow-y: auto; 
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			.messages{
+				flex-grow: 1;
+			}
+
+			.messenger-input{
+				height: 50px;
+				display: flex;
+				flex-direction: row;
+				border-top: $border-color;
+				.text-input{
+					flex-grow: 1;
+					textarea {
+						border: o none;
+						width: 100%;
+						height: 100%;
+						padding: 8px 15px;
+					}
+				}
+
+				.action{
+					button.send{
+						background: $primary-color;
+						color: #FFF;
+						border: 0 none;
+						padding: 7px 15px;
+						line-height: 50px;
+					}
+				}
+			}
 		}
 	}
 }
@@ -101,11 +135,13 @@ body{
 	display: flex;
 	flex-direction: column;
 	padding: 20px;
+	overflow-y: auto;
+	height: 100%;
 	.message{
 		display: flex;
-		margin: 15px 0;
 		flex-direction: row;
 		justify-content: flex-end;
+		margin: 25px;
 		.message-user-image{
 			img{
 				width: 20px;
@@ -133,8 +169,70 @@ body{
 			.message-body{
 				.message-text{
 					background: $primary-color;
+					color: #FFF;
 				}
 			}
 		}
 	}
+}
+
+.channels{
+	.channel{
+		display: flex;
+		border-bottom: 1px solid $border-color;
+		padding: 8px 0;
+		.user-image{
+			width: 30px;
+			img{
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+			}
+		}
+	}
+
+	.channel-info{
+		flex-grow: 1;
+		padding-left: 8px;
+		h2{
+			font-size: 14px;
+			font-weight: 600;
+		}
+		p{
+
+		}
+	}
+}
+
+.members{
+	.member{
+		display: flex;
+		border-bottom: 1px solid $border-color;
+		padding: 8px;
+		.user-image{
+			width: 30px;
+			img{
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+			}
+		}
+
+		.member-info{
+			padding-left: 8px;
+			flex-grow: 1; 
+			h2{
+				font-size: 14px
+			}
+			p{
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+h2.title{
+	font-size: 16px;
+	font-weight: 600;
+	color: rgba(0,0,0,0.8);
 }

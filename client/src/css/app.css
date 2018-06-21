@@ -20,7 +20,6 @@ body {
 .app-messenger {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 .app-messenger .header {
   height: 50px;
@@ -66,6 +65,7 @@ body {
 .app-messenger .main {
   display: flex;
   height: 100%;
+  overflow: hidden;
 }
 .app-messenger .main .sidebar-left {
   width: 200px;
@@ -75,21 +75,53 @@ body {
   width: 300px;
   border-left: 1px solid rgba(0, 0, 0, 0.05);
 }
+.app-messenger .main .sidebar-right .title {
+  padding: 10px;
+}
 .app-messenger .main .content {
   flex-grow: 1;
-  overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.app-messenger .main .content .messages {
+  flex-grow: 1;
+}
+.app-messenger .main .content .messenger-input {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  border-top: rgba(0, 0, 0, 0.05);
+}
+.app-messenger .main .content .messenger-input .text-input {
+  flex-grow: 1;
+}
+.app-messenger .main .content .messenger-input .text-input textarea {
+  border: o none;
+  width: 100%;
+  height: 100%;
+  padding: 8px 15px;
+}
+.app-messenger .main .content .messenger-input .action button.send {
+  background: #2ecc71;
+  color: #FFF;
+  border: 0 none;
+  padding: 7px 15px;
+  line-height: 50px;
 }
 
 .messages {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  overflow-y: auto;
+  height: 100%;
 }
 .messages .message {
   display: flex;
-  margin: 15px 0;
   flex-direction: row;
   justify-content: flex-end;
+  margin: 25px;
 }
 .messages .message .message-user-image img {
   width: 20px;
@@ -110,6 +142,58 @@ body {
 }
 .messages .message.me .message-body .message-text {
   background: #2ecc71;
+  color: #FFF;
+}
+
+.channels .channel {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 8px 0;
+}
+.channels .channel .user-image {
+  width: 30px;
+}
+.channels .channel .user-image img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.channels .channel-info {
+  flex-grow: 1;
+  padding-left: 8px;
+}
+.channels .channel-info h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.members .member {
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 8px;
+}
+.members .member .user-image {
+  width: 30px;
+}
+.members .member .user-image img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.members .member .member-info {
+  padding-left: 8px;
+  flex-grow: 1;
+}
+.members .member .member-info h2 {
+  font-size: 14px;
+}
+.members .member .member-info p {
+  font-size: 12px;
+}
+
+h2.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 /*# sourceMappingURL=app.css.map */
