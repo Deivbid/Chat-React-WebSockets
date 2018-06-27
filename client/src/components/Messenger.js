@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import classNames from 'classnames'
 import Avatar from '../images/profile-default.jpg'
+import {OrderedMap} from 'immutable'
 
 export default class Messenger extends Component{
 
@@ -8,8 +9,7 @@ export default class Messenger extends Component{
 		super(props)
 
 		this.state 				= {
-			height: window.innerHeight,
-			messages: []
+			height: window.innerHeight
 		}
 
 		this._onResize 			= this._onResize.bind(this)
@@ -17,9 +17,10 @@ export default class Messenger extends Component{
 	}
 
 	addTestMessages(){
-		let {messages}			= this.state
+		
+		const {store} 				= this.props
 
-
+		//Adding test messages
 		for(let i = 0; i < 100; i++)
 		{
 			let isMe 				= false
@@ -28,17 +29,37 @@ export default class Messenger extends Component{
 				isMe 				= true
 			}			
 			const newMsg 			= {
+				_id: `${i}`,
 				author: `Author ${i}`,
 				body: `The body of message ${i}`,
 				avatar: Avatar,
 				me: isMe 
 			}
-
-
-			messages.push(newMsg)
+			store.addMessage(i, newMsg)
 		}
 
-		this.setState({messages: messages})
+		//Adding test channels
+		for(let c = 0; c < 10; c++)
+		{
+			const newChannel = {
+				_id: `${c}`,
+				title: `Title of Channel ${c}`,
+				lastMessage: `Hey there ... ${c}`,
+				members: new OrderedMap({
+					2: true,
+					3: true
+				}),
+				messages: new OrderedMap({
+					5: true,
+					6: true,
+					7: true
+				})
+			}
+
+			store.addChannel(c, newChannel)
+		}
+
+		console.log(store)
 	}
 
 	_onResize(){
@@ -57,14 +78,16 @@ export default class Messenger extends Component{
 	}
 	render(){
 		
-		const {store} = this.props
+		const {store} 			= this.props
 		const { height } 		= this.state
 		const style 			= {
 			height: height,
 
 		}
-		console.log(store)
-		const messages = store.getMessages
+		const messages 			= store.getMessages()
+		const channels 			= store.getChannels()
+		const activeChannel 	= store.getActiveChannel()
+		
 		return(
 			<div style={style} className="app-messenger">
 				<div className="header">
@@ -87,16 +110,25 @@ export default class Messenger extends Component{
 				<div className="main">
 					<div className="sidebar-left">
 						<div className="channels">
-							<div className="channel">
-								<div className="user-image">
-									<img src={Avatar} alt="channel-profile" />
-								</div>
 
-								<div className="channel-info">
-									<h2> Toan, Alexander </h2>
-									<p>Hello There....</p>
+						{channels.map((channel, key) => {
+
+							return(
+								<div onClick={(key) => this.onSelectChannel} key={key} className="channel">
+									<div className="user-image">
+										<img src={Avatar} alt="channel-profile" />
+									</div>
+
+									<div className="channel-info">
+										<h2> Toan, Alexander </h2>
+										<p>Hello There....</p>
+									</div>
 								</div>
-							</div>
+							)
+						})}
+
+
+
 						</div>
 					</div>
 
@@ -136,7 +168,7 @@ export default class Messenger extends Component{
 						<div className="members">
 							<div className="member">
 								<div className="user-image">
-									<img src={Avatar} alt="image-right" />
+									<img src={Avatar} alt="right" />
 								</div>
 
 								<div className="member-info">
@@ -147,7 +179,7 @@ export default class Messenger extends Component{
 
 							<div className="member">
 								<div className="user-image">
-									<img src={Avatar} alt="image-right" />
+									<img src={Avatar} alt="e-right" />
 								</div>
 
 								<div className="member-info">
